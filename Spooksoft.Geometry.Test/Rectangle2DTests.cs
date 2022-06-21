@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Spooksoft.Geometry.Test
 {
     [TestClass]
-    public class RectangleTests
+    public class Rectangle2DTests
     {
         [TestMethod]
         public void IntersectsWithFixedVectorTest1()

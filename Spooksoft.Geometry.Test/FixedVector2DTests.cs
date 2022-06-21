@@ -97,5 +97,135 @@ namespace Spooksoft.Geometry.Test
             Assert.AreEqual(3.0, vec2.End.X, Constants.DoubleEpsilon);
             Assert.AreEqual(0.0, vec2.End.Y, Constants.DoubleEpsilon);
         }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest1()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(1.0, 1.0, 3.0, 1.0);
+            var vec2 = new FixedVector2D(2.0, 0.0, 2.0, 2.0);
+
+            // Assert
+
+            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest2()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(1.0, 1.0, 3.0, 1.0);
+            var vec2 = new FixedVector2D(1.0, 0.0, 3.0, 2.0);
+
+            // Assert
+
+            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest3()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(1.0, 1.0, 3.0, 1.0);
+            var vec2 = new FixedVector2D(1.0, 2.0, 3.0, 2.0);
+
+            // Assert
+
+            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest4()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(0.0, 5.0, 1.0, 4.0);
+
+            // Assert
+
+            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest5()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(-1.0, 0.0, 2.0, 0.0);
+
+            // Assert
+
+            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest6()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(0.5, 0.0, 0.6, 0.0);
+
+            // Assert
+
+            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest7()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(-1.0, 0.0, 0.5, 0.0);
+
+            // Assert
+
+            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest8()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(0.5, 0.0, 2.0, 0.0);
+
+            // Assert
+
+            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest9()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(-1.0, 0.0, -0.5, 0.0);
+
+            // Assert
+
+            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest10()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(2.0, 0.0, 3.0, 0.0);
+
+            // Assert
+
+            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+        }
     }
 }

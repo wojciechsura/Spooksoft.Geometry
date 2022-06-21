@@ -448,5 +448,22 @@ namespace Spooksoft.Geometry.Test
             Assert.AreEqual(Math.Sqrt(2.0) / 2.0, rotated.X, Constants.DoubleEpsilon);
             Assert.AreEqual(Math.Sqrt(2.0) / 2.0, rotated.Y, Constants.DoubleEpsilon);
         }
+
+        [TestMethod]
+        public void DistanceToTest()
+        {
+            // Arrange
+
+            var vec1 = new Vector2D(1.0, 1.0);
+            var vec2 = new Vector2D(2.0, 2.0);
+
+            // Act
+
+            double dist = vec1.DistanceTo(vec2);
+
+            // Assert
+
+            Assert.AreEqual(Math.Sqrt(2), dist, Constants.DoubleEpsilon);
+        }
     }
 }

@@ -24,6 +24,11 @@ namespace Spooksoft.Geometry.TwoDimensional
             return angle;
         }
 
+        public double DistanceTo(Vector2D point)
+        {
+            return (point - this).Length;
+        }
+
         public Vector2D WithLength(double length)
         {
             var len = Length;
@@ -79,6 +84,16 @@ namespace Spooksoft.Geometry.TwoDimensional
             var sin = Math.Sin(angle);
 
             return new(cos * X + sin * Y, - sin * X + cos * Y);
+        }
+
+        public override string ToString()
+        {
+            return $"Vector2D: ({X}; {Y})";
+        }
+
+        public bool IsPerpendicularTo(Vector2D secondVector)
+        {
+            return this.DotProductWith(secondVector).IsZero();
         }
 
         public static Vector2D operator * (double value, Vector2D vector)
