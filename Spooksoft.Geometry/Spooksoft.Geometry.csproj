@@ -1,11 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <SignAssembly>False</SignAssembly>
-  </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<SignAssembly>False</SignAssembly>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<RepositoryUrl>https://github.com/wojciechsura/Spooksoft.Geometry</RepositoryUrl>
+		<PackageTags>geometry,mathematics,maths,2d</PackageTags>
+		<PackageProjectUrl>https://github.com/wojciechsura/Spooksoft.Geometry</PackageProjectUrl>
+		<Description>A set of classes simplifying geometrical calculations (vectors, rectangles, intersections etc.)</Description>
+	</PropertyGroup>
 
 </Project>
