@@ -23,7 +23,9 @@ namespace Spooksoft.Geometry.TwoDimensional
 
         public bool IntersectsWith(Rectangle2D rectangle) => IntersectionTester.CheckIntersection(rectangle, this);
 
-        public bool IntersectsWith(FixedVector2D vector) => IntersectionTester.CheckIntersection(this, vector);
+        public (bool intersects, Vector2D? pointOfIntersection) IntersectsWith(FixedVector2D vector) => IntersectionTester.CheckIntersection(this, vector);
+
+        public (bool intersects, Vector2D? pointOfIntersection) IntersectsWith(Ray2D ray) => IntersectionTester.CheckIntersection(ray, this);
 
         public static FixedVector2D operator + (FixedVector2D vec1, Vector2D vec2)
         {

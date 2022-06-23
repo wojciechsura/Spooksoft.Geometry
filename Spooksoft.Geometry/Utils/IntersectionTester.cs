@@ -49,18 +49,18 @@ namespace Spooksoft.Geometry.Utils
 
             // Otherwise we're checking for segment intersection
 
-            if (new FixedVector2D(freeRectangle2D.TopLeft, freeRectangle2D.TopLeft + freeRectangle2D.FirstVector).IntersectsWith(vector))
+            if (new FixedVector2D(freeRectangle2D.TopLeft, freeRectangle2D.TopLeft + freeRectangle2D.FirstVector).IntersectsWith(vector).intersects)
                 return true;
 
-            if (new FixedVector2D(freeRectangle2D.TopLeft, freeRectangle2D.TopLeft + freeRectangle2D.SecondVector).IntersectsWith(vector))
+            if (new FixedVector2D(freeRectangle2D.TopLeft, freeRectangle2D.TopLeft + freeRectangle2D.SecondVector).IntersectsWith(vector).intersects)
                 return true;
 
             if (new FixedVector2D(freeRectangle2D.TopLeft + freeRectangle2D.FirstVector, 
-                freeRectangle2D.TopLeft + freeRectangle2D.FirstVector + freeRectangle2D.SecondVector).IntersectsWith(vector))
+                freeRectangle2D.TopLeft + freeRectangle2D.FirstVector + freeRectangle2D.SecondVector).IntersectsWith(vector).intersects)
                 return true;
 
             if (new FixedVector2D(freeRectangle2D.TopLeft + freeRectangle2D.SecondVector,
-                freeRectangle2D.TopLeft + freeRectangle2D.FirstVector + freeRectangle2D.SecondVector).IntersectsWith(vector))
+                freeRectangle2D.TopLeft + freeRectangle2D.FirstVector + freeRectangle2D.SecondVector).IntersectsWith(vector).intersects)
                 return true;
 
             return false;
@@ -116,7 +116,7 @@ namespace Spooksoft.Geometry.Utils
             return (t >= 0.0 && t <= 1.0 && s >= 0.0 && s <= 1.0);
         }
 
-        public static bool CheckIntersection(FixedVector2D first, FixedVector2D second)
+        public static (bool intersects, Vector2D? pointOfIntersection) CheckIntersection(FixedVector2D first, FixedVector2D second)
         {
             var A1 = first.Start;
             var D1 = first.SpanningVector;
@@ -131,7 +131,7 @@ namespace Spooksoft.Geometry.Utils
 
             // One of spanning vectors is zero
             if (double.IsNaN(t1) || double.IsNaN(t2))
-                return false;
+                return (false, null);
 
             // Segments are colinnear
             if (double.IsPositiveInfinity(t1) || double.IsPositiveInfinity(t2))
@@ -163,10 +163,79 @@ namespace Spooksoft.Geometry.Utils
                 // Remember that in units of delta (deltaX or deltaY regardless)
                 // First vector has coordinates of (0.0, 1.0). Now we only need
                 // to check if those two ranges overlap.
-                return (secondVectorStart <= 1.0 && secondVectorEnd >= 0.0);
+                if (secondVectorStart <= 1.0 && secondVectorEnd >= 0.0)
+                    return (true, null);
+                else
+                    return (false, null);
             }
 
-            return (t1 >= 0.0 && t1 <= 1.0 && t2 >= 0.0 && t2 <= 1.0);
+            if (t1 >= 0.0 && t1 <= 1.0 && t2 >= 0.0 && t2 <= 1.0)
+            {
+                return (true, first.Start + (first.End - first.Start) * t1);
+            }
+            else
+                return (false, null);
+        }
+
+        public static (bool intersects, Vector2D? pointOfIntersection) CheckIntersection(Ray2D ray, FixedVector2D vector)
+        {
+            var A1 = ray.Origin;
+            var D1 = ray.Direction;
+
+            var A2 = vector.Start;
+            var D2 = vector.SpanningVector;
+
+            // A1 + t1 * D1 = A2 + t2 * D2
+            // t1 * D1 - t2 * D2 = A2 - A1
+
+            (double t1, double t2) = MathTools.Solve(D1.X, -D2.X, (A2.X - A1.X), D1.Y, -D2.Y, (A2.Y - A1.Y));
+
+            // One of spanning vectors is zero
+            if (double.IsNaN(t1) || double.IsNaN(t2))
+                return (false, null);
+
+            // Segments are colinnear
+            if (double.IsPositiveInfinity(t1) || double.IsPositiveInfinity(t2))
+            {
+                double deltaX = ray.Direction.X;
+                double deltaY = ray.Direction.Y;
+
+                // Now we express coordinates of vectors as multiplications of deltaX.
+                // Ray's t factor needs only to be positive, checking the second one
+
+                double secondVectorStart, secondVectorEnd;
+
+                // Pick the axis, which has bigger delta (more accurate calculations)
+                if (Math.Abs(deltaX) > Math.Abs(deltaY))
+                {
+                    secondVectorStart = (vector.Start.X - vector.Start.X) / deltaX;
+                    secondVectorEnd = (vector.End.X - vector.Start.X) / deltaX;
+
+                }
+                else
+                {
+                    secondVectorStart = (vector.Start.Y - vector.Start.Y) / deltaY;
+                    secondVectorEnd = (vector.End.Y - vector.Start.Y) / deltaY;
+                }
+
+                // Sort start and end in ascending order
+                secondVectorEnd = Math.Max(secondVectorStart, secondVectorEnd);
+
+                // Remember that in units of delta (deltaX or deltaY regardless)
+                // First vector has coordinates of (0.0, +inf). Now we only need
+                // to check if those two ranges overlap.
+                if (secondVectorEnd >= 0.0)
+                    return (true, null);
+                else
+                    return (false, null);
+            }
+
+            if (t1 >= 0.0 && t2 >= 0.0 && t2 <= 1.0)
+            {
+                return (true, ray.Origin + ray.Direction * t1);
+            }
+            else
+                return (false, null);
         }
 
         /// <remarks>

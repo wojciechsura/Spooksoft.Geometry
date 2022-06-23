@@ -108,7 +108,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+            Assert.IsTrue(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -121,7 +121,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+            Assert.IsTrue(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -134,7 +134,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+            Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -147,7 +147,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+            Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -160,7 +160,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+            Assert.IsTrue(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -173,7 +173,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+            Assert.IsTrue(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -186,7 +186,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+            Assert.IsTrue(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -199,7 +199,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(true, vec1.IntersectsWith(vec2));
+            Assert.IsTrue(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -212,7 +212,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+            Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
         }
 
         [TestMethod]
@@ -225,7 +225,7 @@ namespace Spooksoft.Geometry.Test
 
             // Assert
 
-            Assert.AreEqual(false, vec1.IntersectsWith(vec2));
+            Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
         }
     }
 }
