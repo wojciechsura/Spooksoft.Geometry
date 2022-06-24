@@ -18,7 +18,7 @@ namespace Spooksoft.Geometry.Utils
 
             if (det.IsZero())
             {
-                if (det1.IsZero() || det2.IsZero())
+                if (det1.IsZero() && det2.IsZero())
                     return (double.PositiveInfinity, double.PositiveInfinity);
                 else
                     return (double.NaN, double.NaN);

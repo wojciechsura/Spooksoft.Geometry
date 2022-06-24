@@ -227,5 +227,44 @@ namespace Spooksoft.Geometry.Test
 
             Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
         }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest11()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(3.0, 4.0, 3.0, 4.0);
+
+            // Assert
+
+            Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest12()
+        {
+            // Arrange
+
+            var vec1 = new FixedVector2D(0.0, 0.0, 1.0, 0.0);
+            var vec2 = new FixedVector2D(3.0, 0.0, 3.0, 0.0);
+
+            // Assert
+
+            Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
+        }
+
+        [TestMethod]
+        public void FixedVectorIntersectionTest13()
+        {
+            // Arrange
+            var vec1 = new FixedVector2D(6.0, 252.0, 86.0, 252.0);
+            var vec2 = new FixedVector2D(53.622661447384935, 68.67678530610203, 53.622661447384935, 68.67678530610203);
+
+            // Assert
+
+            Assert.IsFalse(vec1.IntersectsWith(vec2).intersects);
+        }
+        
     }
 }

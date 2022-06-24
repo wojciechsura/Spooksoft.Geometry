@@ -1,4 +1,5 @@
-﻿using Spooksoft.Geometry.TwoDimensional;
+﻿using Spooksoft.Geometry.Extensions;
+using Spooksoft.Geometry.TwoDimensional;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +47,10 @@ namespace Spooksoft.Geometry.Utils
             // Simplest case: one of segment's ends are inside the rectangle
             if (CheckIntersection(freeRectangle2D, vector.Start) || CheckIntersection(freeRectangle2D, vector.End))
                 return true;
+
+            // Zero vector cannot intersect the rectangle
+            if (vector.Length.IsZero())
+                return false;
 
             // Otherwise we're checking for segment intersection
 

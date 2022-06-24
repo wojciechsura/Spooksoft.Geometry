@@ -10,6 +10,10 @@
 		<PackageTags>geometry,mathematics,maths,2d</PackageTags>
 		<PackageProjectUrl>https://github.com/wojciechsura/Spooksoft.Geometry</PackageProjectUrl>
 		<Description>A set of classes simplifying geometrical calculations (vectors, rectangles, intersections etc.)</Description>
+		<Version>1.0.0.2</Version>
+		<AssemblyVersion>1.0.0.2</AssemblyVersion>
+		<FileVersion>1.0.0.2</FileVersion>
+		<PackageReleaseNotes>Fixed bug in MathTools.Solve, which caused false positives on FixedVector2D to FixedVector2D intersection tests</PackageReleaseNotes>
 	</PropertyGroup>
 
 </Project>
